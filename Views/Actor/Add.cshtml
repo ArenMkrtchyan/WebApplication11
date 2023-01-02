@@ -1,0 +1,34 @@
+﻿@model ActorAddEdit
+
+<h1>Add Actor</h1>
+<form enctype="multipart/form-data" method="post">@* file server uxarkelu hamar*@
+
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName"></span>
+    </div>
+     <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName"></span>
+    </div>
+     <div class="form-group">
+        <label asp-for="Biography"></label>
+        <textarea asp-for="Biography" class="form-control">
+            </textarea>
+    </div>
+     <div class="form-group">
+        <label asp-for="DOB"></label>
+        <input asp-for="DOB" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Actor image</label>
+        <input type="file" name="ImageFile" />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success"></button>
+    </div>
+</form>
+

@@ -1,0 +1,73 @@
+﻿@model List<MoovieListView>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Moovie List</h1>
+
+
+<partial name="_MoovieFilter" model="(MoovieSearchViewModel)ViewBag.SearchInfo" />
+<a asp-action="Add" class="btn btn-primary"> 
+    Add new moovie
+</a>
+<table class="table table-striped">
+    @foreach(var item in Model)
+    {
+        <tr class="@(item.IsCommingSoon?"new-film":null)">
+            <td>
+                <img src="/images/moovies/@item.ImageFile" style="width:50px;"/>
+            </td>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Date
+            </td>
+            <td>
+                @item.ActorCount
+            </td>
+            <td>
+                @item.Categories
+            </td>
+        </tr>
+    }
+</table>
+
+<div class="pages">
+    @if(ViewBag.CurrentPage > 1)
+    {
+         <a asp-action="Index" asp-route-pageIndex="@ViewBag.CurrentPage-1" class="btn btn-primary">
+        previus
+    </a>
+    }
+   
+@for(int pageIndex = 1; pageIndex <= ViewBag.PageCount;pageIndex++)
+    {
+        if(pageIndex == ViewBag.CurrentPage)
+        {
+            <span class="btn btn-dark">
+                @pageIndex
+            </span>
+        }
+        else
+        {
+               <a asp-action="Index" asp-route-pageIndex="@pageIndex" class="btn btn-primary">
+            @pageIndex
+        </a>
+        }
+     
+    }
+    @if(ViewBag.CurrentPage < ViewBag.PageCount)
+    {
+        <a asp-action="Index" asp-route-pageIndex="@ViewBag.CurrentPage+1" class="btn btn-primary">
+        next
+    </a>
+    }
+    
+</div>
+<style type="text/css">
+    .new-film{
+        color:green!important;
+        font-weight:bold;
+    }
+</style>

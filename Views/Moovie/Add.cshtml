@@ -1,0 +1,70 @@
+﻿@model MoovieAddEdit
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h1>Add moovie</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group mt-2">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"> </textarea>
+    </div>
+    <div class="form-group mt-2">
+        <label asp-for="Date"></label>
+        <input asp-for="Date" />
+    </div>
+    <div class="form-group mt-2">
+        <label asp-for="PosterImageFileName">Poster Image</label>
+        <input type="file" name="PosterImage" />
+    </div>
+
+    <div class="form-group mt-2">
+        <label asp-for="CountryId">Select country</label>
+        <select asp-for="CountryId" class="form-control">
+            <option>Select</option>
+            @foreach (DropDownModel item in ViewBag.Countries)
+            {
+                <option value="@item.Value">@item.Text</option>
+
+            }
+        </select>
+    </div>
+
+    <div class="form-group mt-2">
+        @foreach (DropDownModel item in ViewBag.Categories)
+        {
+            <div class="category">
+                <input type="checkbox" value="@item.Value" id="category_@item.Value" name="@(nameof(Model.CategoryIds))" />
+                <label for="category_@item.Value">@item.Text</label>
+            </div>
+
+        }
+    </div>
+    
+    <div class="form-group" mt-2>
+        @foreach(DropDownModel item in ViewBag.Actors)
+        {
+            <div class="category">
+                <input type= "checkbox" value="@item.Value" id="actor_@item.Value" name="@(nameof(Model.ActorIds))"/>
+                <label for="actor_@item.Value">@item.Text</label>
+            </div>
+        }
+    </div>
+    <div class="form-group mt-2">
+        <button type="submit" class="btn btn-success">Add</button>
+    </div>
+</form>
+
+
+            <style type="text/css">
+                .category label:hover{
+                    color:red;
+                    font-weight:bold;
+                    cursor:pointer;
+                }
+                </style>

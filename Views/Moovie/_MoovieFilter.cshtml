@@ -1,0 +1,21 @@
+﻿@model MoovieSearchViewModel
+<div>
+
+    <form method="get">
+        <input type="text" asp-for="MoovieName" placeholder="Type moovie name" />
+        <select asp-for="CategoryIds" multiple>
+            <option>Select category</option>
+            @foreach(DropDownModel item in ViewBag.Categories)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+        <label>
+            Show only upcomming
+       <input type="checkbox" asp-for="OnlyUpcomming" />
+        </label>
+      
+
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </form>
+</div>
